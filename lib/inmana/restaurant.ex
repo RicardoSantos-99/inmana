@@ -2,21 +2,25 @@ defmodule Inmana.Restaurant do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @required_fields [:name, :email]
+  @email_regex ~r/^[A-Za-z0-9\._%+\-+']+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,4}$/
+
+  @derive {Jason.Encoder, only: @required_fields ++ [:id]}
   @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "restaurants" do
     field :email, :string
-    field(:name, :string)
+    field :name, :string
 
     timestamps()
   end
 
   def changeset(params) do
     %__MODULE__{}
-    |> cast(params, [:email, :name])
-    |> validate_required([:email, :name])
+    |> cast(params, @required_fields)
+    |> validate_required(@required_fields)
+    |> validate_format(:email, @email_regex)
     |> validate_length(:name, min: 2)
-    |> validate_format(:email, ~r/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
-    |> unique_constraint(:email)
+    |> unique_constraint([:email])
   end
 end
