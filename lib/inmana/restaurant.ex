@@ -2,6 +2,8 @@ defmodule Inmana.Restaurant do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Inmana.Supply
+
   @required_fields [:name, :email]
   @email_regex ~r/^[A-Za-z0-9\._%+\-+']+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,4}$/
 
@@ -11,6 +13,8 @@ defmodule Inmana.Restaurant do
   schema "restaurants" do
     field :email, :string
     field :name, :string
+
+    has_many :supplies, Supply
 
     timestamps()
   end
