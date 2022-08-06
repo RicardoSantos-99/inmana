@@ -1,9 +1,10 @@
 defmodule Inmana do
-  alias Inmana.Restaurants.Create, as: RestaurantCreate
-  alias Inmana.Supplies.Create, as: SupplyCreate
-  alias Inmana.Supplies.Get, as: SupplyGet
+  alias Inmana.Restaurants
+  alias Inmana.Supplies
 
-  defdelegate create_restaurant(params), to: RestaurantCreate, as: :call
-  defdelegate create_supply(params), to: SupplyCreate, as: :call
-  defdelegate get_supply(params), to: SupplyGet, as: :call
+  defdelegate create_restaurant(params), to: Restaurants.Create, as: :call
+  defdelegate create_supply(params), to: Supplies.Create, as: :call
+  defdelegate get_supply(params), to: Supplies.Get, as: :call
+  defdelegate list_supplies, to: Supplies.List, as: :call
+  defdelegate get_by_expiration, to: Supplies.GetByExpiration, as: :call
 end

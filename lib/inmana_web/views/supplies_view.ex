@@ -3,7 +3,7 @@ defmodule InmanaWeb.SuppliesView do
 
   def render("create.json", %{supply: supply}) do
     %{
-      message: "Restaurant created!",
+      message: "Supply created!",
       supply: supply
     }
   end
